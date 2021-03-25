@@ -19,9 +19,8 @@ public class Intake extends SubsystemBase {
     /**
      * will i keep the name as succ? probably
      * can you change it? no.
-     * @param speed = speed at which succage occurs
      */
-    public void succ(double speed) {
+    public static void succ(double speed) {
         intake.set(speed);
     }
 }
