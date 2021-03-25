@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
      * will i keep the name as succ? probably
      * can you change it? no.
      */
-    public static void succ(double speed) {
+    public void succ(double speed) {
         intake.set(speed);
     }
 }
