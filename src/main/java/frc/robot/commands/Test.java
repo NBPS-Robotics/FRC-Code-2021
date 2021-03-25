@@ -1,8 +1,6 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Constants.JoystickConstants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
