@@ -42,7 +42,7 @@ public class Shooter extends SubsystemBase {
         Time.wait(1000);
         for(int i=0; i<3; i++){
             servo.set(ShooterConstants.Servo_Up);
-            Time.wait(1000);
+            Time.wait(500);
             servo.set(ShooterConstants.Servo_Down);
             Time.wait(1500);
         }
