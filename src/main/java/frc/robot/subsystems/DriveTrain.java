@@ -16,12 +16,13 @@ public class DriveTrain extends SubsystemBase {
     public static CANSparkMax frontRight = new CANSparkMax(DriveConstants.FrontRight_ID, MotorType.kBrushless);
     public static CANSparkMax backLeft = new CANSparkMax(DriveConstants.BackLeft_ID, MotorType.kBrushless);
     public static CANSparkMax backRight = new CANSparkMax(DriveConstants.BackRight_ID, MotorType.kBrushless);
-
+    
     private MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
     /** Creates a new ExampleSubsystem. */
     public DriveTrain() {
         drive.setSafetyEnabled(false);
+        frontLeft.setInverted(false);
     }
     /**
    * Drives the robot using base mecanum (y stick 1 = forward, x stick 1 = sideways, x stick 2 = rotation)
@@ -31,7 +32,7 @@ public class DriveTrain extends SubsystemBase {
    * @param c = rotation speed
    */
   public void mecanumDrive(double x, double y, double c) {
-    drive.driveCartesian(x,-y,c);
+    drive.driveCartesian(x*DriveConstants.speed,-y*DriveConstants.speed,c*DriveConstants.speed);
   }
   /**
    * Drives the robot using base mecanum (y stick 1 = forward, x stick 1 = sideways, x stick 2 = rotation)
@@ -45,4 +46,13 @@ public class DriveTrain extends SubsystemBase {
   {
       drive.driveCartesian(-x, y, c, theta);
   }
+  public void testMotor(double power){
+      frontLeft.set(power*DriveConstants.speed);
+      frontRight.set(power*DriveConstants.speed);
+      backLeft.set(power*DriveConstants.speed);
+      backRight.set(power*DriveConstants.speed);
+  }
+  public static void speedControl(double Speed){
+    DriveConstants.speed = Speed;
+}
 }

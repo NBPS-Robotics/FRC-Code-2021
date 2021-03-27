@@ -1,20 +1,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.JoystickConstants;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.JoyStick;
 import frc.robot.subsystems.Shooter;
 
 
-public class Test extends CommandBase {
+public class TeleOp extends CommandBase {
     private final DriveTrain drive;
     private final Shooter shooter;
     private final Intake intake;
     private final JoyStick stick;
 
-    public Test(DriveTrain Drive, Intake Intake, Shooter Shooter, JoyStick Stick){
+    public TeleOp(DriveTrain Drive, Intake Intake, Shooter Shooter, JoyStick Stick){
         drive = Drive;
         shooter = Shooter;
         intake = Intake;
@@ -33,9 +35,23 @@ public class Test extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.mecanumDrive(stick.getAxis(JoystickConstants.XStick1_ID),stick.getAxis(JoystickConstants.YStick1_ID), stick.getAxis(JoystickConstants.XStick2_ID));
-    intake.succ(stick.getAxis(JoystickConstants.YStick2_ID));
-    shooter.shoot(0.5);
+    drive.mecanumDrive(stick.getAxis(JoystickConstants.XStick1_ID),stick.getAxis(JoystickConstants.YStick2_ID), stick.getAxis(JoystickConstants.XStick2_ID));
+    if(stick.Ypressed()){
+        intake.succ(IntakeConstants.IntakeSpeed);
+    }
+    else{
+      intake.succ(0);
+    }
+    if(stick.Apressed()){
+        shooter.toggle(ShooterConstants.Shooter_Speed);
+    }
+    if(stick.Bpressed()){
+        shooter.shootGoal();
+    }
+    if(stick.LB()){
+      DriveTrain.speedControl(0.3);
+    }
+    else DriveTrain.speedControl(1);
   }
 
   // Called once the command ends or is interrupted.

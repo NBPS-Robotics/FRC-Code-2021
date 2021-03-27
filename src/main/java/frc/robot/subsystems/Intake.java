@@ -11,8 +11,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Intake extends SubsystemBase {
     //init the motors
-    public static CANSparkMax intake = new CANSparkMax(IntakeConstants.Intake_ID, MotorType.kBrushless);
-
+    public static CANSparkMax intake = new CANSparkMax(IntakeConstants.Intake_ID, MotorType.kBrushed);
+    public static boolean state = false;
     /** Creates a new ExampleSubsystem. */
     public Intake() {
     }
@@ -22,5 +22,10 @@ public class Intake extends SubsystemBase {
      */
     public void succ(double speed) {
         intake.set(speed);
+    }
+    public void toggle(double speed){
+        if(state == false) succ(speed);
+        else succ(0);
+        state = !state;
     }
 }

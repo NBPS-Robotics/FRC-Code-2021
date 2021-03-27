@@ -18,19 +18,21 @@ public final class Constants {
         public static final int FrontRight_ID = 6;
         public static final int BackLeft_ID = 3;
         public static final int BackRight_ID = 5;
+        public static double speed = 1.0;
     }
     
     public static final class IntakeConstants {
         public static final int Intake_ID = 4;
-        public static final double IntakeSpeed = -0.8;
+        public static final double IntakeSpeed = -0.6;
     }
 
     public static final class ShooterConstants {
         public static final int Shooter_ID = 1;
+        public static final int Shooter2_ID = 7;
         public static final int Servo_ID = 0;
 
-        public static final double Servo_Up = .5;
-        public static final double Servo_Down = 0;
+        public static final double Servo_Up = 0.37;
+        public static final double Servo_Down = 0.5;
 
         public static final double Shooter_Speed = -0.9; //ideal motor speed to run the shooter at
         public static final double Charge_Delay = 4; //time in seconds for the shooter to reach ideal speed

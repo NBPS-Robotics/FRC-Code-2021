@@ -17,4 +17,22 @@ public class JoyStick extends SubsystemBase {
     public double getAxis(int axis){
         return stick.getRawAxis(axis);
     }
+    public boolean Ypressed(){
+        return stick.getRawButton(4);
+    }
+    public boolean Apressed(){
+        return stick.getRawButton(1);
+    }
+    public boolean Bpressed(){
+        return stick.getRawButton(2);
+    }
+    public boolean Xpressed(){
+        return stick.getRawButton(3);
+    }
+    public boolean LB(){
+        return stick.getRawButton(5);
+    }
+    public boolean RB(){
+        return stick.getRawButton(6);
+    }
 }
