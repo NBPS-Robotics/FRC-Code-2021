@@ -8,13 +8,9 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,10 +18,10 @@ import frc.robot.Constants.DriveConstants;
 
 public class Drive extends SubsystemBase {
     // The motors on the left side of the drive.
-    public static CANSparkMax frontLeft = new CANSparkMax(DriveConstants.FrontLeft_ID, MotorType.kBrushless);
-    public static CANSparkMax frontRight = new CANSparkMax(DriveConstants.FrontRight_ID, MotorType.kBrushless);
-    public static CANSparkMax backLeft = new CANSparkMax(DriveConstants.BackLeft_ID, MotorType.kBrushless);
-    public static CANSparkMax backRight = new CANSparkMax(DriveConstants.BackRight_ID, MotorType.kBrushless);
+    private static CANSparkMax frontLeft = new CANSparkMax(DriveConstants.FrontLeft_ID, MotorType.kBrushless);
+    private static CANSparkMax frontRight = new CANSparkMax(DriveConstants.FrontRight_ID, MotorType.kBrushless);
+    private static CANSparkMax backLeft = new CANSparkMax(DriveConstants.BackLeft_ID, MotorType.kBrushless);
+    private static CANSparkMax backRight = new CANSparkMax(DriveConstants.BackRight_ID, MotorType.kBrushless);
     private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(
             frontLeft, backLeft);
 
@@ -34,13 +30,13 @@ public class Drive extends SubsystemBase {
             frontRight, backRight);
 
     // The robot's drive
-    private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
-
+    //private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+    private MecanumDrive m_drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     // The left-side drive encoder
-    private final CANEncoder m_leftEncoder = frontLeft.getEncoder();
+    private final CANEncoder m_leftEncoder = backLeft.getEncoder();
 
     // The right-side drive encoder
-    private final CANEncoder m_rightEncoder = frontRight.getEncoder();
+    private final CANEncoder m_rightEncoder = backRight.getEncoder();
 
     // The gyro sensor
     private final NavX m_gyro = new NavX();
@@ -93,16 +89,6 @@ public class Drive extends SubsystemBase {
   public void resetOdometry(Pose2d pose) {
     resetEncoders();
     m_odometry.resetPosition(pose, m_gyro.getRotation());
-  }
-
-  /**
-   * Drives the robot using arcade controls.
-   *
-   * @param fwd the commanded forward movement
-   * @param rot the commanded rotation
-   */
-  public void arcadeDrive(double fwd, double rot) {
-    m_drive.arcadeDrive(fwd, rot);
   }
 
   /**
@@ -185,4 +171,35 @@ public class Drive extends SubsystemBase {
   public double getTurnRate() {
     return -m_gyro.getRate();
   }
+  /**
+   * Drives the robot using base mecanum (y stick 1 = forward, x stick 1 = sideways, x stick 2 = rotation)
+   *
+   * @param x = speed in x direction
+   * @param y = speed in y direction
+   * @param c = rotation speed
+   */
+  public void mecanumDrive(double x, double y, double c) {
+    m_drive.driveCartesian(x*DriveConstants.speed,-y*DriveConstants.speed,c*DriveConstants.speed);
+  }
+  /**
+   * Drives the robot using base mecanum (y stick 1 = forward, x stick 1 = sideways, x stick 2 = rotation)
+   * This, however, is in relation to the field instead of the robot
+   * @param x = speed in x direction
+   * @param y = speed in y direction
+   * @param c = rotation speed
+   * @param theta = navx gyro angle
+   */
+  public void mecanumDriveGyro(double x, double y, double c, double theta)
+  {
+      m_drive.driveCartesian(-x, y, c, theta);
+  }
+  public void testMotor(double power){
+      frontLeft.set(power*DriveConstants.speed);
+      frontRight.set(power*DriveConstants.speed);
+      backLeft.set(power*DriveConstants.speed);
+      backRight.set(power*DriveConstants.speed);
+  }
+  public static void speedControl(double Speed){
+    DriveConstants.speed = Speed;
+}
 }

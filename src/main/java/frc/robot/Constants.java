@@ -39,7 +39,7 @@ public final class Constants {
         public static final double Servo_Up = 0.35;
         public static final double Servo_Down = 0.5;
 
-        public static final double Shooter_Speed = -0.7; //ideal motor speed to run the shooter at
+        public static final double Shooter_Speed = -0.8; //ideal motor speed to run the shooter at
         public static final double Charge_Delay = 4; //time in seconds for the shooter to reach ideal speed
     }
     public static final class JoystickConstants {
@@ -66,26 +66,22 @@ public final class Constants {
         public static final double Auto_Charge_Delay = 2;
         public static final double Auto_Shoot_EndTime = 5;
 
-         // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
-        // These characterization values MUST be determined either experimentally or theoretically
-        // for *your* robot's drive.
-        // The Robot Characterization Toolsuite provides a convenient tool for obtaining these
-        // values for your robot.
-        public static final double ksVolts = 0.0948;
-        public static final double kvVoltSecondsPerMeter = 2.54;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.379;
+        
+        public static final double ksVolts = 0.0948; //0.0948
+        public static final double kvVoltSecondsPerMeter = 2.54; //2.54
+        public static final double kaVoltSecondsSquaredPerMeter = 0.379; //0.379
 
         // Example value only - as above, this must be tuned for your drive!
-        public static final double kPDriveVel = 13.8;
+        public static final double kPDriveVel = 13.8; //13.8
         
-        public static final double kTrackwidthMeters = 1.0491769532303634;
+        public static final double kTrackwidthMeters = 1.0491769532303634; //1.0491769532303634
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
-
-        public static final double kMaxSpeedMetersPerSecond = 3;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+        //Meters Per Second
+        public static final double kMaxSpeed = 3; //3
+        public static final double kMaxAccelerationMetersPerSecondSquared = 3; //3
 
           // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
-        public static final double kRamseteB = 2;
-        public static final double kRamseteZeta = 0.7;
+        public static final double kRamseteB = 2; //2
+        public static final double kRamseteZeta = 0.7; //0.7
     }
 }

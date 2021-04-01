@@ -22,7 +22,6 @@ public class DriveTrain extends SubsystemBase {
     /** Creates a new ExampleSubsystem. */
     public DriveTrain() {
         drive.setSafetyEnabled(false);
-        frontLeft.setInverted(false);
     }
     /**
    * Drives the robot using base mecanum (y stick 1 = forward, x stick 1 = sideways, x stick 2 = rotation)

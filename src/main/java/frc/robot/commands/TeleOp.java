@@ -4,19 +4,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.JoystickConstants;
 import frc.robot.Constants.ShooterConstants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.JoyStick;
 import frc.robot.subsystems.Shooter;
 
 
 public class TeleOp extends CommandBase {
-    private final DriveTrain drive;
+    private final Drive drive;
     private final Shooter shooter;
     private final Intake intake;
     private final JoyStick stick;
 
-    public TeleOp(DriveTrain Drive, Intake Intake, Shooter Shooter, JoyStick Stick){
+    public TeleOp(Drive Drive, Intake Intake, Shooter Shooter, JoyStick Stick){
         drive = Drive;
         shooter = Shooter;
         intake = Intake;
@@ -46,9 +46,9 @@ public class TeleOp extends CommandBase {
         shooter.shootGoal();
     }
     if(stick.LB()){
-      DriveTrain.speedControl(0.3);
+      Drive.speedControl(0.3);
     }
-    else DriveTrain.speedControl(1);
+    else Drive.speedControl(1);
     if(stick.Dpad()== 0){
       shooter.on(ShooterConstants.Shooter_Speed);
     }
