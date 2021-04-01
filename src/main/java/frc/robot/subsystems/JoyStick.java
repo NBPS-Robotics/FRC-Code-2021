@@ -35,4 +35,7 @@ public class JoyStick extends SubsystemBase {
     public boolean RB(){
         return stick.getRawButton(6);
     }
+    public int Dpad(){
+        return stick.getPOV(0);
+    }
 }

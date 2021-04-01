@@ -36,14 +36,11 @@ public class TeleOp extends CommandBase {
   @Override
   public void execute() {
     drive.mecanumDrive(stick.getAxis(JoystickConstants.XStick1_ID),stick.getAxis(JoystickConstants.YStick2_ID), stick.getAxis(JoystickConstants.XStick2_ID));
-    if(stick.Ypressed()){
+    if(stick.RB()){
         intake.succ(IntakeConstants.IntakeSpeed);
     }
     else{
       intake.succ(0);
-    }
-    if(stick.Apressed()){
-        shooter.toggle(ShooterConstants.Shooter_Speed);
     }
     if(stick.Bpressed()){
         shooter.shootGoal();
@@ -52,6 +49,12 @@ public class TeleOp extends CommandBase {
       DriveTrain.speedControl(0.3);
     }
     else DriveTrain.speedControl(1);
+    if(stick.Dpad()== 0){
+      shooter.on(ShooterConstants.Shooter_Speed);
+    }
+    if(stick.Dpad()== 180){
+      shooter.off();
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 
 
 public class NavX extends SubsystemBase {
@@ -29,5 +30,10 @@ public class NavX extends SubsystemBase {
     {
         navx.reset();
     }
-
+    public Rotation2d getRotation(){
+        return navx.getRotation2d();
+    }
+    public double getRate(){
+        return navx.getRate();
+    }
 }
