@@ -42,15 +42,24 @@ public class TeleOp extends CommandBase {
     else{
       intake.succ(0);
     }
+    if(stick.Ypressed()){
+        shooter.shootGoal(ShooterConstants.Shooter_Speed,ShooterConstants.Shooter2_Speed);
+    }
     if(stick.Bpressed()){
-        shooter.shootGoal();
+      shooter.shootGoal(ShooterConstants.Shooter_Speed*0.78,ShooterConstants.Shooter2_Speed*0.78);
+    }
+    if(stick.Apressed()){
+      shooter.shootGoal(ShooterConstants.Shooter_Speed*0.75,ShooterConstants.Shooter2_Speed*0.75);
+    }
+    if(stick.Xpressed()){
+      shooter.shootGoal(ShooterConstants.Shooter_Speed*0.3,ShooterConstants.Shooter2_Speed*0.3);
     }
     if(stick.LB()){
-      Drive.speedControl(0.3);
+      Drive.speedControl(0.25);
     }
-    else Drive.speedControl(1);
+    else Drive.speedControl(0.5);
     if(stick.Dpad()== 0){
-      shooter.on(ShooterConstants.Shooter_Speed);
+      shooter.on(ShooterConstants.Shooter_Speed,ShooterConstants.Shooter2_Speed);
     }
     if(stick.Dpad()== 180){
       shooter.off();

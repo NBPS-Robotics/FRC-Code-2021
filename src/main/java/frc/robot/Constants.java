@@ -39,7 +39,8 @@ public final class Constants {
         public static final double Servo_Up = 0.35;
         public static final double Servo_Down = 0.5;
 
-        public static final double Shooter_Speed = -0.8; //ideal motor speed to run the shooter at
+        public static final double Shooter_Speed = -1; //ideal motor speed to run the shooter at
+        public static final double Shooter2_Speed = -0.8;
         public static final double Charge_Delay = 4; //time in seconds for the shooter to reach ideal speed
     }
     public static final class JoystickConstants {

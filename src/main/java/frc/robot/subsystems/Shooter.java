@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
     /** Creates a new ExampleSubsystem. */
     public Shooter() {
         servo.set(ShooterConstants.Servo_Down);
-        shooter2.follow(shooter);
+        
         
     }
     private Servo servo = new Servo(ShooterConstants.Servo_ID);
@@ -28,18 +28,19 @@ public class Shooter extends SubsystemBase {
     /**
      * @param speed = speed to shoot at
      */
-    public void on(double speed)
+    public void on(double speed, double speed2)
     {
         shooter.set(speed);
+        shooter2.set(speed2);
     }
     public void off(){
-        on(0);
+        on(0,0);
     }
-    public void shootGoal(){
-        shooter.set(ShooterConstants.Shooter_Speed);
+    public void shootGoal(double speed, double speed2){
+        on(speed, speed2);
         servo.set(ShooterConstants.Servo_Down);
         intake.succ(IntakeConstants.IntakeSpeed);
-        Time.wait(1000);
+        Time.wait(2000);
         servo.set(ShooterConstants.Servo_Up);
         Time.wait(500);
         servo.set(ShooterConstants.Servo_Down);
@@ -48,11 +49,6 @@ public class Shooter extends SubsystemBase {
         servo.set(ShooterConstants.Servo_Down);
         intake.succ(0);
         off();
-    }
-    public void toggle(double speed){
-        if(state == false) on(speed);
-        else off();
-        state = !state;
     }
     /**
      * 
