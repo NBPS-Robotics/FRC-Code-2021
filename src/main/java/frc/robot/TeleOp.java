@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.IntakeConstants;
@@ -10,7 +10,7 @@ import frc.robot.subsystems.JoyStick;
 import frc.robot.subsystems.Shooter;
 
 
-public class TeleOp extends CommandBase {
+public class TeleOp {
     private final Drive drive;
     private final Shooter shooter;
     private final Intake intake;
@@ -22,9 +22,9 @@ public class TeleOp extends CommandBase {
         intake = Intake;
         stick = Stick;
         addRequirements(Drive);
-        addRequirements(Shooter);
-        addRequirements(Intake);
-        addRequirements(Stick);
+        //addRequirements(Shooter);
+        //addRequirements(Intake);
+        //addRequirements(Stick);
     }
     // Called when the command is initially scheduled.
   @Override
@@ -66,15 +66,4 @@ public class TeleOp extends CommandBase {
     }
   }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
 }
